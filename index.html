@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>APK Extraction and Modification Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .upload-section, .edit-section, .action-buttons {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .action-buttons button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        .action-buttons button:hover {
+            background-color: #45a049;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>APK Extraction and Modification Tool</h1>
+    
+    <div class="container">
+        <!-- File Upload Section -->
+        <div class="upload-section">
+            <h2>Upload APK File</h2>
+            <input type="file" id="apkUpload" accept=".apk">
+        </div>
+
+        <!-- Edit APK Properties Section -->
+        <div class="edit-section">
+            <h2>Edit APK Properties</h2>
+            <label for="enabledProperty">Is Enabled:</label>
+            <select id="enabledProperty">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button onclick="extractAndModify()">Extract & Modify APK</button>
+            <button onclick="recompileAPK()">Recompile APK</button>
+        </div>
+
+        <!-- Output Section -->
+        <div class="output-section">
+            <h2>Output</h2>
+            <pre id="outputArea">No actions performed yet.</pre>
+        </div>
+    </div>
+
+    <script>
+        function extractAndModify() {
+            const apkFile = document.getElementById('apkUpload').files[0];
+            const isEnabled = document.getElementById('enabledProperty').value;
+
+            if (!apkFile) {
+                alert('Please upload an APK file first.');
+                return;
+            }
+
+            // Simulate APK extraction and modification
+            document.getElementById('outputArea').textContent = `Extracting APK: ${apkFile.name}\nModifying property "Is Enabled" to ${isEnabled}...`;
+
+            // Here you would add code to handle the extraction and modification logic.
+            // This would be your JavaScript that communicates with your server or backend system
+            // to handle APK extraction and modification. This can be done using a library like
+            // 'apktool' for extraction and modification.
+
+            // For now, simulate the modification process.
+            setTimeout(() => {
+                document.getElementById('outputArea').textContent += '\nAPK modification complete!';
+            }, 2000);
+        }
+
+        function recompileAPK() {
+            // Simulate recompiling APK
+            const apkFile = document.getElementById('apkUpload').files[0];
+            
+            if (!apkFile) {
+                alert('Please upload an APK file first.');
+                return;
+            }
+
+            // Simulate APK recompiling
+            document.getElementById('outputArea').textContent = `Recompiling APK: ${apkFile.name}...`;
+
+            setTimeout(() => {
+                document.getElementById('outputArea').textContent += '\nAPK recompilation complete!';
+                alert('APK has been recompiled!');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
