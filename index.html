@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>APK Extraction and Modification Tool</title>
+    <title>APK Asset Modification Tool</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,10 +45,13 @@
         input[type="file"] {
             margin-bottom: 10px;
         }
+        select, button {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <h1>APK Extraction and Modification Tool</h1>
+    <h1>APK Asset Modification Tool</h1>
     
     <div class="container">
         <!-- File Upload Section -->
@@ -57,10 +60,17 @@
             <input type="file" id="apkUpload" accept=".apk">
         </div>
 
-        <!-- Edit APK Properties Section -->
+        <!-- Edit GameObject Properties Section -->
         <div class="edit-section">
-            <h2>Edit APK Properties</h2>
-            <label for="enabledProperty">Is Enabled:</label>
+            <h2>Edit GameObject Properties</h2>
+            <label for="gameObjectSelect">Select GameObject:</label>
+            <select id="gameObjectSelect">
+                <option value="gameObject1">GameObject1</option>
+                <option value="gameObject2">GameObject2</option>
+                <!-- Dynamic GameObject options will go here after APK extraction -->
+            </select>
+            <br>
+            <label for="enabledProperty">Set Enabled:</label>
             <select id="enabledProperty">
                 <option value="true">True</option>
                 <option value="false">False</option>
@@ -81,27 +91,39 @@
     </div>
 
     <script>
+        let gameObjects = [];
+
         function extractAndModify() {
             const apkFile = document.getElementById('apkUpload').files[0];
             const isEnabled = document.getElementById('enabledProperty').value;
+            const selectedGameObject = document.getElementById('gameObjectSelect').value;
 
             if (!apkFile) {
                 alert('Please upload an APK file first.');
                 return;
             }
 
-            // Simulate APK extraction and modification
-            document.getElementById('outputArea').textContent = `Extracting APK: ${apkFile.name}\nModifying property "Is Enabled" to ${isEnabled}...`;
+            // Simulate APK extraction process
+            document.getElementById('outputArea').textContent = `Extracting APK: ${apkFile.name}\nModifying GameObject "${selectedGameObject}" with "Enabled" set to ${isEnabled}...`;
 
-            // Here you would add code to handle the extraction and modification logic.
-            // This would be your JavaScript that communicates with your server or backend system
-            // to handle APK extraction and modification. This can be done using a library like
-            // 'apktool' for extraction and modification.
-
-            // For now, simulate the modification process.
+            // Simulate extraction (this is where backend extraction would happen)
             setTimeout(() => {
-                document.getElementById('outputArea').textContent += '\nAPK modification complete!';
+                // Simulating adding GameObjects after APK extraction
+                gameObjects = ['GameObject1', 'GameObject2', 'GameObject3'];  // Example GameObjects
+                updateGameObjectOptions();
+                document.getElementById('outputArea').textContent += '\nAPK extraction complete. Modify GameObjects as needed!';
             }, 2000);
+        }
+
+        function updateGameObjectOptions() {
+            const gameObjectSelect = document.getElementById('gameObjectSelect');
+            gameObjectSelect.innerHTML = '';
+            gameObjects.forEach(gameObject => {
+                const option = document.createElement('option');
+                option.value = gameObject;
+                option.textContent = gameObject;
+                gameObjectSelect.appendChild(option);
+            });
         }
 
         function recompileAPK() {
@@ -124,3 +146,4 @@
     </script>
 </body>
 </html>
+ 
